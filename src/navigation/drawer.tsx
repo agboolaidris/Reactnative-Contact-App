@@ -1,18 +1,16 @@
 import * as React from "react";
-import { Button, View } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { NavigationContainer } from "@react-navigation/native";
-import HomeScreen from "../screens/home";
+import ContactList from "../screens/contact-list";
+import CreateContact from "../screens/create-contact";
+import { Route } from "../constants/route";
 
 const Drawer = createDrawerNavigator();
 
 export const DrawerNavigation = () => {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Notifications" component={HomeScreen} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <Drawer.Navigator initialRouteName={Route.ContactList}>
+      <Drawer.Screen name={Route.ContactList} component={ContactList} />
+      <Drawer.Screen name={Route.CreateContact} component={CreateContact} />
+    </Drawer.Navigator>
   );
 };

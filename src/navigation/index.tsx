@@ -1,12 +1,13 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { PrivateStack, PublicStack } from "./stack";
+import { PublicStack } from "./stack";
+import { DrawerNavigation } from "./drawer";
 
 function Navigation() {
+  const isAuthenticated = false;
   return (
     <NavigationContainer>
-      {/* <PublicStack /> */}
-      <PrivateStack />
+      {isAuthenticated ? <DrawerNavigation /> : <PublicStack />}
     </NavigationContainer>
   );
 }
