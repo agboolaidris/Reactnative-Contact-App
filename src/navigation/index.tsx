@@ -2,12 +2,18 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { PublicStack } from "./stack";
 import { DrawerNavigation } from "./drawer";
+import { useGlobalState } from "../store";
 
 function Navigation() {
-  const isAuthenticated = false;
+  const { authInitialState } = useGlobalState();
+  console.log(authInitialState, "state");
   return (
     <NavigationContainer>
-      {isAuthenticated ? <DrawerNavigation /> : <PublicStack />}
+      {authInitialState.isAuthenticated ? (
+        <DrawerNavigation />
+      ) : (
+        <PublicStack />
+      )}
     </NavigationContainer>
   );
 }
