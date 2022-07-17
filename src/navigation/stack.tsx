@@ -5,7 +5,7 @@ import Register from "../screens/register";
 import { round } from "react-native-reanimated";
 import { Route } from "../constants/route";
 
-const Stack = createNativeStackNavigator();
+const Stack: any = createNativeStackNavigator();
 
 // export const PrivateStack = () => {
 //   return (

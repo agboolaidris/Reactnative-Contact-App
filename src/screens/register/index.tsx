@@ -1,11 +1,14 @@
 import { View, Text } from "react-native";
 import React from "react";
+import { Typography } from "../../ui/atoms";
 
 const Register = () => {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Register</Text>
-    </View>
+    <Typography
+      style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+    >
+      <Typography>Register</Typography>
+    </Typography>
   );
 };
 

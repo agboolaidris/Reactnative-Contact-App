@@ -1,15 +1,15 @@
-import { View, Text, Button } from "react-native";
 import React from "react";
 import { useGlobalDispatch } from "../../store";
 import { AUTHTYPE } from "../../store/reducers/auth";
+import { StyledView, Typography } from "../../ui/atoms";
 
 const ContactList = () => {
   const dispatch = useGlobalDispatch();
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>ContactList</Text>
-      <Button
+    <StyledView>
+      <Typography>ContactList</Typography>
+      {/* <Button
         title="Login out"
         onPress={() =>
           dispatch({
@@ -17,8 +17,8 @@ const ContactList = () => {
             payload: { isAuthenticated: false },
           })
         }
-      />
-    </View>
+      /> */}
+    </StyledView>
   );
 };
 
