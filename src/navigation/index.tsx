@@ -4,7 +4,7 @@ import { PublicStack } from "./stack";
 import { DrawerNavigation } from "./drawer";
 
 function Navigation() {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
   return (
     <NavigationContainer>
       {isAuthenticated ? <DrawerNavigation /> : <PublicStack />}
