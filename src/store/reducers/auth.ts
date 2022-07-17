@@ -11,21 +11,22 @@ export const authInitialState: AuthIntialState = {
   isAuthenticated: false,
 };
 
+export const AUTHTYPE = {
+  LOGIN: "LOGIN",
+};
+
 export const AuthReducer = (
   state: AuthIntialState,
   { payload, type }: AuthActionProps
 ) => {
   switch (type) {
-    case "LOGIN":
-      console.log("hh");
+    case AUTHTYPE.LOGIN:
       return {
         ...state,
         ...payload,
       };
-      break;
 
     default:
       return state;
-      break;
   }
 };

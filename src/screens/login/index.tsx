@@ -1,6 +1,7 @@
 import { View, Text, Button } from "react-native";
 import React from "react";
 import { useGlobalDispatch } from "../../store";
+import { AUTHTYPE } from "../../store/reducers/auth";
 
 const Login = () => {
   const dispatch = useGlobalDispatch();
@@ -10,7 +11,7 @@ const Login = () => {
       <Button
         title="Login"
         onPress={() =>
-          dispatch({ type: "LOGIN", payload: { isAuthenticated: true } })
+          dispatch({ type: AUTHTYPE.LOGIN, payload: { isAuthenticated: true } })
         }
       />
     </View>
