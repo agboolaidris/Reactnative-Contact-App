@@ -4,7 +4,7 @@ import React from "react";
 const CreateContact = () => {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>CreateContact</Text>
+      <Text>Create Contact</Text>
     </View>
   );
 };
