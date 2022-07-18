@@ -11,6 +11,7 @@ interface Props {
   style?: StyleProp<ViewStyle>;
   iconPosition?: "left" | "right";
   error?: string;
+  secureTextEntry?: boolean;
 }
 const TextInput = ({
   value,
@@ -20,6 +21,7 @@ const TextInput = ({
   style,
   iconPosition,
   error,
+  secureTextEntry,
 }: Props) => {
   return (
     <StyledView style={style}>
@@ -29,7 +31,11 @@ const TextInput = ({
         error={!!error}
       >
         {icon && icon}
-        <TextInputStyled onChangeText={onChangeText} value={value} />
+        <TextInputStyled
+          onChangeText={onChangeText}
+          value={value}
+          secureTextEntry={secureTextEntry}
+        />
       </TextInputWrapper>
       {error && <Typography color="danger">{error}</Typography>}
     </StyledView>
