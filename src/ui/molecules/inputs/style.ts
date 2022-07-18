@@ -1,5 +1,5 @@
 import { ViewProps } from "react-native";
-import styled from "styled-components/native";
+import styled from "@emotion/native";
 import { getColor } from "../../../assets/theme/colors";
 
 interface Props extends ViewProps {

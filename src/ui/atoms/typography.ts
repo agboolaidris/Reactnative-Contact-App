@@ -1,9 +1,9 @@
 import React from "react";
-import styled from "styled-components/native";
+import styled from "@emotion/native";
 import { getColor, ColorType } from "../../assets/theme/colors";
 
 interface Props {
-  color: ColorType;
+  color?: ColorType;
 }
 
 export const Typography = styled.Text<Props>`
