@@ -4,7 +4,7 @@ import ContactList from "../screens/contact-list";
 import CreateContact from "../screens/create-contact";
 import { Route } from "../constants/route";
 
-const Drawer = createDrawerNavigator();
+const Drawer: any = createDrawerNavigator();
 
 export const DrawerNavigation = () => {
   return (
