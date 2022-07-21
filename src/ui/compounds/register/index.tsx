@@ -7,7 +7,7 @@ import { Pressable, View, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Route } from "../../../constants/route";
 
-const Login = () => {
+const Register = () => {
   const [value, setvalue] = useState("");
   const [showPassword, setshowPassword] = useState(false);
   const handleChange = (v: string) => {
@@ -38,11 +38,24 @@ const Login = () => {
           Welcome to ContactUI
         </Typography>
         <Typography varaint="subTitle" style={{ textAlign: "center" }}>
-          Please Login here
+          Please Register here
         </Typography>
       </View>
 
-      <TextInput label="Email" value={value} onChangeText={handleChange} />
+      <TextInput label="First Name" value={value} onChangeText={handleChange} />
+
+      <TextInput
+        style={{ marginTop: 10 }}
+        label="Last Name"
+        value={value}
+        onChangeText={handleChange}
+      />
+      <TextInput
+        style={{ marginTop: 10 }}
+        label="Email"
+        value={value}
+        onChangeText={handleChange}
+      />
       <TextInput
         style={{ marginTop: 10 }}
         label="passowrd"
@@ -60,10 +73,10 @@ const Login = () => {
       <Button title="Submit" style={{ marginTop: 20 }} color="danger" loading />
 
       <View style={{ marginTop: 20, flexDirection: "row" }}>
-        <Typography>Need a new account?</Typography>
-        <Pressable onPress={() => navigate(Route.Register)}>
+        <Typography>Already have an acount?</Typography>
+        <Pressable onPress={() => navigate(Route.Login)}>
           <Typography color="danger" style={{ marginLeft: 10 }}>
-            Register
+            Login
           </Typography>
         </Pressable>
       </View>
@@ -71,4 +84,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
