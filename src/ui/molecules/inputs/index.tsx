@@ -27,7 +27,7 @@ const TextInput = ({
     <StyledView style={style}>
       <Typography>{label}</Typography>
       <TextInputWrapper
-        flex={iconPosition === "right" ? "reverse" : "row"}
+        direction={iconPosition === "right" ? "reverse" : "row"}
         error={!!error}
       >
         {icon && icon}
@@ -37,7 +37,9 @@ const TextInput = ({
           secureTextEntry={secureTextEntry}
         />
       </TextInputWrapper>
-      {error && <Typography color="danger">{error}</Typography>}
+      {typeof error === "string" && (
+        <Typography color="danger">{error}</Typography>
+      )}
     </StyledView>
   );
 };
