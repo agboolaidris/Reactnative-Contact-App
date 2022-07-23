@@ -3,13 +3,14 @@ import styled from "@emotion/native";
 import { getColor } from "../../../assets/theme/colors";
 
 interface Props extends ViewProps {
-  flex: "row" | "reverse";
+  direction: "row" | "reverse";
   error: boolean;
 }
 export const TextInputWrapper = styled.View<Props>`
   border-color: ${({ error }) => getColor(error ? "danger" : "black")};
   border-width: 1px;
-  flex-direction: ${({ flex }) => (flex === "reverse" ? "row-reverse" : "row")};
+  flex-direction: ${({ direction }) =>
+    direction === "reverse" ? "row-reverse" : "row"};
   align-items: center;
   padding: 5px;
   border-radius: 5px;

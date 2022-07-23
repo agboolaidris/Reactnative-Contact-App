@@ -7,16 +7,29 @@ import { Pressable, View, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Route } from "../../../constants/route";
 
-const Register = () => {
-  const [value, setvalue] = useState("");
-  const [showPassword, setshowPassword] = useState(false);
-  const handleChange = (v: string) => {
-    setvalue(v);
+interface Props {
+  values: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
   };
+  errors: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+  };
+  handleChange: (name: string, value: string) => void;
+  handleSubmit: () => void;
+}
+
+const Register = ({ handleChange, handleSubmit, errors, values }: Props) => {
+  const { navigate } = useNavigation<any>();
+  const [showPassword, setshowPassword] = useState(false);
   const handleShowPassword = () => {
     setshowPassword((prev) => !prev);
   };
-  const { navigate } = useNavigation<any>();
   return (
     <MainWrapper style={{ marginTop: 30 }}>
       <Image
@@ -42,25 +55,33 @@ const Register = () => {
         </Typography>
       </View>
 
-      <TextInput label="First Name" value={value} onChangeText={handleChange} />
+      <TextInput
+        label="First Name"
+        value={values.firstName}
+        onChangeText={(value) => handleChange("firstName", value)}
+        error={errors.firstName}
+      />
 
       <TextInput
         style={{ marginTop: 10 }}
         label="Last Name"
-        value={value}
-        onChangeText={handleChange}
+        value={values.lastName}
+        onChangeText={(value) => handleChange("lastName", value)}
+        error={errors.lastName}
       />
       <TextInput
         style={{ marginTop: 10 }}
         label="Email"
-        value={value}
-        onChangeText={handleChange}
+        value={values.email}
+        onChangeText={(value) => handleChange("email", value)}
+        error={errors.email}
       />
       <TextInput
         style={{ marginTop: 10 }}
         label="passowrd"
-        value={value}
-        onChangeText={handleChange}
+        value={values.password}
+        onChangeText={(value) => handleChange("password", value)}
+        error={errors.password}
         icon={
           <Pressable onPress={handleShowPassword}>
             <Typography>{showPassword ? "Hide" : "Show"}</Typography>
@@ -70,7 +91,12 @@ const Register = () => {
         secureTextEntry={!showPassword}
       />
 
-      <Button title="Submit" style={{ marginTop: 20 }} color="danger" loading />
+      <Button
+        title="Submit"
+        style={{ marginTop: 20 }}
+        color="danger"
+        onPress={handleSubmit}
+      />
 
       <View style={{ marginTop: 20, flexDirection: "row" }}>
         <Typography>Already have an acount?</Typography>
