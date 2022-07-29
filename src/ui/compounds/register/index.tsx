@@ -9,22 +9,29 @@ import { Route } from "../../../constants/route";
 
 interface Props {
   values: {
-    firstName: string;
-    lastName: string;
+    firstname: string;
+    lastname: string;
     email: string;
     password: string;
   };
   errors: {
-    firstName: string;
-    lastName: string;
+    firstname: string;
+    lastname: string;
     email: string;
     password: string;
   };
   handleChange: (name: string, value: string) => void;
   handleSubmit: () => void;
+  loading?: boolean;
 }
 
-const Register = ({ handleChange, handleSubmit, errors, values }: Props) => {
+const Register = ({
+  handleChange,
+  handleSubmit,
+  errors,
+  values,
+  loading,
+}: Props) => {
   const { navigate } = useNavigation<any>();
   const [showPassword, setshowPassword] = useState(false);
   const handleShowPassword = () => {
@@ -57,17 +64,17 @@ const Register = ({ handleChange, handleSubmit, errors, values }: Props) => {
 
       <TextInput
         label="First Name"
-        value={values.firstName}
-        onChangeText={(value) => handleChange("firstName", value)}
-        error={errors.firstName}
+        value={values.firstname}
+        onChangeText={(value) => handleChange("firstname", value)}
+        error={errors.firstname}
       />
 
       <TextInput
         style={{ marginTop: 10 }}
         label="Last Name"
-        value={values.lastName}
-        onChangeText={(value) => handleChange("lastName", value)}
-        error={errors.lastName}
+        value={values.lastname}
+        onChangeText={(value) => handleChange("lastname", value)}
+        error={errors.lastname}
       />
       <TextInput
         style={{ marginTop: 10 }}
@@ -96,6 +103,7 @@ const Register = ({ handleChange, handleSubmit, errors, values }: Props) => {
         style={{ marginTop: 20 }}
         color="danger"
         onPress={handleSubmit}
+        loading={loading}
       />
 
       <View style={{ marginTop: 20, flexDirection: "row" }}>

@@ -22,9 +22,9 @@ const Button = ({ title, loading, style, disabled, color, onPress }: Props) => {
   return (
     <Pressable
       style={({ pressed }) => pressed && { opacity: 0.7 }}
-      onPress={disabled ? null : onPress && onPress}
+      onPress={disabled || loading ? null : onPress && onPress}
     >
-      <ButtonWrapper style={style} color={disabled ? "grey" : color}>
+      <ButtonWrapper style={style} color={disabled || loading ? "grey" : color}>
         {loading ? (
           <ActivityIndicator
             color={color === "grey" ? getColor("black") : getColor("white")}

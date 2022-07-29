@@ -1,5 +1,5 @@
 import { PORT, SERVER_URL } from "@env";
-console.log(PORT);
+console.log(SERVER_URL);
 
 export const ENV = {
   PORT,

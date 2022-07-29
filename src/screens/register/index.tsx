@@ -1,37 +1,45 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
+import { Route } from "../../constants/route";
 import axiosInstance from "../../helpers/axiosIntance";
+import { useGlobalDispatch, useGlobalState } from "../../store";
+import { AUTHTYPE } from "../../store/reducers/auth";
+///import { authInitialState } from "../../store/reducers/auth";
 import RegisterComponent from "../../ui/compounds/register";
 
 const Register = () => {
+  const { authInitialState } = useGlobalState();
   const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
   });
   const [errors, setErrors] = useState({
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
   });
+  const dispatch = useGlobalDispatch();
+  const { navigate }: any = useNavigation();
   const handleChange = (name: string, value: string) => {
     setForm((prev) => ({ ...prev, [name]: value }));
     //validate first name
-    if (name === "firstName") {
+    if (name === "firstname") {
       if (value.length < 1)
-        setErrors((prev) => ({ ...prev, firstName: "First name is required" }));
-      else setErrors((prev) => ({ ...prev, firstName: "" }));
+        setErrors((prev) => ({ ...prev, firstname: "First name is required" }));
+      else setErrors((prev) => ({ ...prev, firstname: "" }));
     }
 
     //validate last name
-    if (name === "lastName") {
+    if (name === "lastname") {
       if (value.length < 1)
         setErrors((prev) => ({
           ...prev,
-          lastName: "Last name is required",
+          lastname: "Last name is required",
         }));
-      else setErrors((prev) => ({ ...prev, lastName: "" }));
+      else setErrors((prev) => ({ ...prev, lastname: "" }));
     }
 
     //validate email
@@ -63,15 +71,15 @@ const Register = () => {
   const handleSubmit = () => {
     //validate first name
 
-    if (form.firstName.length < 1)
-      setErrors((prev) => ({ ...prev, firstName: "First name is required" }));
+    if (form.firstname.length < 1)
+      setErrors((prev) => ({ ...prev, firstname: "First name is required" }));
 
     //validate last name
 
-    if (form.lastName.length < 1)
+    if (form.lastname.length < 1)
       setErrors((prev) => ({
         ...prev,
-        lastName: "Last name is required",
+        lastname: "Last name is required",
       }));
 
     //validate email
@@ -87,14 +95,30 @@ const Register = () => {
         ...prev,
         password: "password is required",
       }));
-    const validateForm =
-      Object.values(form).filter((value) => value.trim().length > 0).length < 1;
 
-    if (validateForm) return;
+    const validateForm =
+      Object.values(form).filter((value) => value.trim().length > 0).length > 0;
+
+    if (!validateForm) return;
+
+    dispatch({
+      type: AUTHTYPE.IS_LOADING,
+      payload: {},
+    });
 
     axiosInstance
       .post("/auth/register", { ...form })
-      .catch((err) => console.log("err", err));
+      .then(() => {
+        dispatch({ type: AUTHTYPE.REGISTER, payload: {} });
+        navigate(Route.Login);
+      })
+      .catch((err) => {
+        setErrors(err.response.data);
+        dispatch({
+          type: AUTHTYPE.AUTH_ERROR,
+          payload: {},
+        });
+      });
   };
   return (
     <RegisterComponent
@@ -102,6 +126,7 @@ const Register = () => {
       handleSubmit={handleSubmit}
       errors={errors}
       values={form}
+      loading={authInitialState.isloading}
     />
   );
 };
