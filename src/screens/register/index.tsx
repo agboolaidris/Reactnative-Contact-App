@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axiosInstance from "../../helpers/axiosIntance";
 import RegisterComponent from "../../ui/compounds/register";
 
 const Register = () => {
@@ -91,7 +92,9 @@ const Register = () => {
 
     if (validateForm) return;
 
-    console.log("submited");
+    axiosInstance
+      .post("/auth/register", { ...form })
+      .catch((err) => console.log("err", err));
   };
   return (
     <RegisterComponent
