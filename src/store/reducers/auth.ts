@@ -1,5 +1,6 @@
 export interface AuthIntialState {
-  isAuthenticated: boolean;
+  isAuthenticated?: boolean;
+  isloading?: boolean;
 }
 
 export interface AuthActionProps {
@@ -9,10 +10,14 @@ export interface AuthActionProps {
 
 export const authInitialState: AuthIntialState = {
   isAuthenticated: false,
+  isloading: false,
 };
 
 export const AUTHTYPE = {
   LOGIN: "LOGIN",
+  IS_LOADING: "ISLOADING",
+  AUTH_ERROR: "AUTH_ERROR",
+  REGISTER: "REGISTER",
 };
 
 export const AuthReducer = (
@@ -20,10 +25,23 @@ export const AuthReducer = (
   { payload, type }: AuthActionProps
 ) => {
   switch (type) {
+    case AUTHTYPE.IS_LOADING:
+      return {
+        ...state,
+        isloading: true,
+      };
+    case AUTHTYPE.AUTH_ERROR:
+      return authInitialState;
+
     case AUTHTYPE.LOGIN:
       return {
         ...state,
         ...payload,
+      };
+    case AUTHTYPE.REGISTER:
+      return {
+        ...state,
+        isloading: false,
       };
 
     default:
