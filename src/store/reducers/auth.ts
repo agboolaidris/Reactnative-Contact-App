@@ -1,6 +1,11 @@
 export interface AuthIntialState {
   isAuthenticated?: boolean;
   isloading?: boolean;
+  user?: {
+    firstname: string;
+    lastname: string;
+    email: string;
+  };
 }
 
 export interface AuthActionProps {
@@ -11,6 +16,7 @@ export interface AuthActionProps {
 export const authInitialState: AuthIntialState = {
   isAuthenticated: false,
   isloading: false,
+  user: undefined,
 };
 
 export const AUTHTYPE = {
