@@ -6,13 +6,28 @@ import Button from "../../molecules/buttons";
 import { Pressable, View, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Route } from "../../../constants/route";
-
-const Login = () => {
-  const [value, setvalue] = useState("");
-  const [showPassword, setshowPassword] = useState(false);
-  const handleChange = (v: string) => {
-    setvalue(v);
+interface Props {
+  values: {
+    email: string;
+    password: string;
   };
+  errors: {
+    email: string;
+    password: string;
+  };
+  handleChange: (name: string, value: string) => void;
+  handleSubmit: () => void;
+  loading?: boolean;
+}
+const Login = ({
+  handleChange,
+  handleSubmit,
+  errors,
+  values,
+  loading,
+}: Props) => {
+  const [showPassword, setshowPassword] = useState(false);
+
   const handleShowPassword = () => {
     setshowPassword((prev) => !prev);
   };
@@ -41,13 +56,19 @@ const Login = () => {
           Please Login here
         </Typography>
       </View>
-
-      <TextInput label="Email" value={value} onChangeText={handleChange} />
+      <TextInput
+        style={{ marginTop: 10 }}
+        label="Email"
+        value={values.email}
+        onChangeText={(value) => handleChange("email", value)}
+        error={errors.email}
+      />
       <TextInput
         style={{ marginTop: 10 }}
         label="passowrd"
-        value={value}
-        onChangeText={handleChange}
+        value={values.password}
+        onChangeText={(value) => handleChange("password", value)}
+        error={errors.password}
         icon={
           <Pressable onPress={handleShowPassword}>
             <Typography>{showPassword ? "Hide" : "Show"}</Typography>
@@ -57,7 +78,13 @@ const Login = () => {
         secureTextEntry={!showPassword}
       />
 
-      <Button title="Submit" style={{ marginTop: 20 }} color="danger" loading />
+      <Button
+        title="Submit"
+        style={{ marginTop: 20 }}
+        color="danger"
+        onPress={handleSubmit}
+        loading={loading}
+      />
 
       <View style={{ marginTop: 20, flexDirection: "row" }}>
         <Typography>Need a new account?</Typography>
