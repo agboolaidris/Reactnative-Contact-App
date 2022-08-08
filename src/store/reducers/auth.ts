@@ -24,6 +24,7 @@ export const AUTHTYPE = {
   IS_LOADING: "ISLOADING",
   AUTH_ERROR: "AUTH_ERROR",
   REGISTER: "REGISTER",
+  LOGOUT: "LOGOUT",
 };
 
 export const AuthReducer = (
@@ -37,6 +38,7 @@ export const AuthReducer = (
         isloading: true,
       };
     case AUTHTYPE.AUTH_ERROR:
+    case AUTHTYPE.LOGOUT:
       return authInitialState;
 
     case AUTHTYPE.LOGIN:

@@ -1,10 +1,11 @@
 import React from "react";
-import { useGlobalDispatch } from "../../store";
+import { useGlobalDispatch, useGlobalState } from "../../store";
 import { AUTHTYPE } from "../../store/reducers/auth";
 import { StyledView, Typography } from "../../ui/atoms";
 
 const ContactList = () => {
   const dispatch = useGlobalDispatch();
+  const { authInitialState } = useGlobalState();
 
   return (
     <StyledView>
@@ -18,6 +19,10 @@ const ContactList = () => {
           })
         }
       /> */}
+      <Typography>
+        {authInitialState.user?.firstname}
+        {authInitialState.user?.lastname}
+      </Typography>
     </StyledView>
   );
 };

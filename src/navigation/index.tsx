@@ -1,20 +1,48 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { PublicStack } from "./stack";
 import { DrawerNavigation } from "./drawer";
-import { useGlobalState } from "../store";
-import { ENV } from "../config/env";
+import { useGlobalDispatch, useGlobalState } from "../store";
+import { ActivityIndicator, SafeAreaView } from "react-native";
+import axiosInstance from "../helpers/axiosIntance";
+import { AUTHTYPE } from "../store/reducers/auth";
 function Navigation() {
+  const [isLoading, setisLoading] = useState(true);
   const { authInitialState } = useGlobalState();
-  console.log(ENV.PORT);
+  const dispatch = useGlobalDispatch();
+  React.useEffect(() => {
+    axiosInstance
+      .get("/auth/isme")
+      .then((res) => {
+        console.log(res);
+        setisLoading(false);
+        dispatch({
+          type: AUTHTYPE.LOGIN,
+          payload: { user: res.data, isAuthenticated: true },
+        });
+      })
+      .catch((err) => {
+        setisLoading(false);
+        console.log(err.response.data, "dd");
+      });
+  }, []);
+
   return (
-    <NavigationContainer>
-      {authInitialState.isAuthenticated ? (
-        <DrawerNavigation />
+    <>
+      {!isLoading ? (
+        <NavigationContainer>
+          {authInitialState.isAuthenticated ? (
+            <DrawerNavigation />
+          ) : (
+            <PublicStack />
+          )}
+        </NavigationContainer>
       ) : (
-        <PublicStack />
+        <SafeAreaView>
+          <ActivityIndicator />
+        </SafeAreaView>
       )}
-    </NavigationContainer>
+    </>
   );
 }
 

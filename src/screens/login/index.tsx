@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LoginComponent from "../../ui/compounds/login";
 import { useNavigation } from "@react-navigation/native";
 import { Route } from "../../constants/route";
 import axiosInstance from "../../helpers/axiosIntance";
 import { useGlobalDispatch, useGlobalState } from "../../store";
 import { AUTHTYPE } from "../../store/reducers/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
 const Login = () => {
   const { authInitialState } = useGlobalState();
@@ -16,8 +18,10 @@ const Login = () => {
     email: "",
     password: "",
   });
+
   const dispatch = useGlobalDispatch();
   const { navigate }: any = useNavigation();
+
   const handleChange = (name: string, value: string) => {
     setForm((prev) => ({ ...prev, [name]: value }));
 
@@ -47,6 +51,13 @@ const Login = () => {
     }
   };
 
+  useEffect(() => {
+    axios
+      .get("https://jsonplaceholder.typicode.com/posts")
+      .then((res) => console.log(res.data, "res"))
+      .catch((err) => console.log(err));
+  }, []);
+
   const handleSubmit = () => {
     //validate email
     if (form.email.length < 1)
@@ -75,17 +86,19 @@ const Login = () => {
     axiosInstance
       .post("/auth/login", { ...form })
       .then((res) => {
-        console.log(res.data);
+        AsyncStorage.setItem("token", res.data.token);
         dispatch({
           type: AUTHTYPE.LOGIN,
           payload: {
             isAuthenticated: true,
             isloading: false,
+            user: res.data.user,
           },
         });
       })
       .catch((err) => {
-        setErrors((prev) => ({ ...prev, ...err.response.data }));
+        setErrors((prev) => ({ ...prev, ...err.response.data?.error }));
+
         dispatch({
           type: AUTHTYPE.AUTH_ERROR,
           payload: {},

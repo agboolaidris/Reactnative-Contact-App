@@ -6,6 +6,7 @@ import Button from "../../molecules/buttons";
 import { Pressable, View, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Route } from "../../../constants/route";
+import Message from "../../molecules/message";
 interface Props {
   values: {
     email: string;
@@ -56,6 +57,7 @@ const Login = ({
           Please Login here
         </Typography>
       </View>
+
       <TextInput
         style={{ marginTop: 10 }}
         label="Email"
