@@ -1,14 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { StyledView, Typography } from "../../ui/atoms";
+import { Typography } from "../../ui/atoms";
 
 const CreateContact = () => {
   return (
-    <StyledView
-      style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-    >
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Typography>Create Contact</Typography>
-    </StyledView>
+    </View>
   );
 };
 

@@ -6,7 +6,7 @@ import Button from "../../molecules/buttons";
 import { Pressable, View, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Route } from "../../../constants/route";
-import Message from "../../molecules/message";
+
 interface Props {
   values: {
     email: string;

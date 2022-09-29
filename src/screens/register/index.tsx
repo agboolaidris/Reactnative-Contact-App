@@ -108,7 +108,7 @@ const Register = () => {
 
     axiosInstance
       .post("/auth/register", { ...form })
-      .then(() => {
+      .then((res) => {
         dispatch({ type: AUTHTYPE.REGISTER, payload: {} });
         navigate(Route.Login);
       })

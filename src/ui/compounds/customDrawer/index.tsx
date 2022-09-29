@@ -1,8 +1,9 @@
 import * as React from "react";
 import { DrawerContentComponentProps } from "@react-navigation/drawer";
 import { Route } from "../../../constants/route";
-import { Typography } from "../../atoms";
+import { Typography, StyledSafeAreaView } from "../../atoms";
 import { Alert, Pressable, SafeAreaView, View } from "react-native";
+import AntiIcons from "@expo/vector-icons/AntDesign";
 import { CustomDrawerStyled } from "./styled";
 import { getColor } from "../../../assets/theme/colors";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -24,20 +25,21 @@ const CustomerDrawer = ({ navigation }: DrawerContentComponentProps) => {
       },
     ]);
   };
+
   const menuItems = [
     {
       name: "Contact List Page",
-      icon: <Typography>IT</Typography>,
+      icon: <AntiIcons name="contacts" color={getColor("black")} size={16} />,
       onPress: () => navigation.navigate(Route.ContactList),
     },
     {
       name: "Logout",
-      icon: <Typography>IT</Typography>,
+      icon: <AntiIcons name="logout" color={getColor("black")} size={16} />,
       onPress: handleLogout,
     },
   ];
   return (
-    <SafeAreaView>
+    <StyledSafeAreaView>
       {menuItems.map((menu, index) => {
         return (
           <Pressable
@@ -54,7 +56,7 @@ const CustomerDrawer = ({ navigation }: DrawerContentComponentProps) => {
           </Pressable>
         );
       })}
-    </SafeAreaView>
+    </StyledSafeAreaView>
   );
 };
 

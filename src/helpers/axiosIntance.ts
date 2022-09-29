@@ -1,7 +1,9 @@
-import axios from "axios";
+import axios, { AxiosRequestHeaders } from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ENV } from "../config/env";
-const headers = {};
+const headers: AxiosRequestHeaders = {
+  // "Content-Type": "application/json",
+};
 
 const axiosInstance = axios.create({
   baseURL: ENV.SERVER_URL,
