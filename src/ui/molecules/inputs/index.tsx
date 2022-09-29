@@ -1,7 +1,7 @@
-import { StyleProp, ViewStyle } from "react-native";
+import { StyleProp, ViewStyle, View } from "react-native";
 import React, { ReactNode } from "react";
 import { TextInputStyled, TextInputWrapper } from "./style";
-import { StyledView, Typography } from "../../atoms";
+import { Typography } from "../../atoms";
 
 interface Props {
   value: string;
@@ -24,7 +24,7 @@ const TextInput = ({
   secureTextEntry,
 }: Props) => {
   return (
-    <StyledView style={style}>
+    <View style={style}>
       <Typography>{label}</Typography>
       <TextInputWrapper
         direction={iconPosition === "right" ? "reverse" : "row"}
@@ -40,7 +40,7 @@ const TextInput = ({
       {typeof error === "string" && (
         <Typography color="danger">{error}</Typography>
       )}
-    </StyledView>
+    </View>
   );
 };
 

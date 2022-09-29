@@ -14,7 +14,6 @@ function Navigation() {
     axiosInstance
       .get("/auth/isme")
       .then((res) => {
-        console.log(res);
         setisLoading(false);
         dispatch({
           type: AUTHTYPE.LOGIN,
@@ -23,7 +22,6 @@ function Navigation() {
       })
       .catch((err) => {
         setisLoading(false);
-        console.log(err.response.data, "dd");
       });
   }, []);
 

@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import LoginComponent from "../../ui/compounds/login";
 import { useNavigation } from "@react-navigation/native";
-import { Route } from "../../constants/route";
 import axiosInstance from "../../helpers/axiosIntance";
 import { useGlobalDispatch, useGlobalState } from "../../store";
 import { AUTHTYPE } from "../../store/reducers/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import axios from "axios";
+import { Route } from "../../constants/route";
 
 const Login = () => {
   const { authInitialState } = useGlobalState();
@@ -20,7 +19,7 @@ const Login = () => {
   });
 
   const dispatch = useGlobalDispatch();
-  const { navigate }: any = useNavigation();
+  const { navigate } = useNavigation();
 
   const handleChange = (name: string, value: string) => {
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -50,13 +49,6 @@ const Login = () => {
       else setErrors((prev) => ({ ...prev, password: "" }));
     }
   };
-
-  useEffect(() => {
-    axios
-      .get("https://jsonplaceholder.typicode.com/posts")
-      .then((res) => console.log(res.data, "res"))
-      .catch((err) => console.log(err));
-  }, []);
 
   const handleSubmit = () => {
     //validate email

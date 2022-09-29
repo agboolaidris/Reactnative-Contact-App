@@ -6,7 +6,7 @@ const colors = {
   success: "#4cc9f0",
   grey: "#adb5bd",
   white: "#ffffff",
-  black: " #070606",
+  black: "#070606",
 };
 
 // 👇️ type Keys = "name" | "age" | "country"

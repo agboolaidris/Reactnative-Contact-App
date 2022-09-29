@@ -1,5 +1,5 @@
 import { Typography } from "./typography";
-import { StyledView } from "./view";
+import { StyledSafeAreaView } from "./view";
 import { Container, Wrapper } from "./container";
 
-export { Typography, StyledView, Container, Wrapper };
+export { Typography, Container, Wrapper, StyledSafeAreaView };
