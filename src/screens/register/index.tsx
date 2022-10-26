@@ -113,6 +113,7 @@ const Register = () => {
         navigate(Route.Login);
       })
       .catch((err) => {
+        console.log(err.response.data);
         setErrors(err.response.data);
         dispatch({
           type: AUTHTYPE.AUTH_ERROR,

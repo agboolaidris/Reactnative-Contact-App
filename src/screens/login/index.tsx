@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import LoginComponent from "../../ui/compounds/login";
-import { useNavigation } from "@react-navigation/native";
 import axiosInstance from "../../helpers/axiosIntance";
 import { useGlobalDispatch, useGlobalState } from "../../store";
 import { AUTHTYPE } from "../../store/reducers/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Route } from "../../constants/route";
 
 const Login = () => {
   const { authInitialState } = useGlobalState();
@@ -19,7 +17,6 @@ const Login = () => {
   });
 
   const dispatch = useGlobalDispatch();
-  const { navigate } = useNavigation();
 
   const handleChange = (name: string, value: string) => {
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -90,7 +87,7 @@ const Login = () => {
       })
       .catch((err) => {
         setErrors((prev) => ({ ...prev, ...err.response.data?.error }));
-
+        console.log(err.response.data);
         dispatch({
           type: AUTHTYPE.AUTH_ERROR,
           payload: {},

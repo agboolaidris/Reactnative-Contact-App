@@ -2,7 +2,7 @@ import * as React from "react";
 import { DrawerContentComponentProps } from "@react-navigation/drawer";
 import { Route } from "../../../constants/route";
 import { Typography, StyledSafeAreaView } from "../../atoms";
-import { Alert, Pressable, SafeAreaView, View } from "react-native";
+import { Alert, Pressable } from "react-native";
 import AntiIcons from "@expo/vector-icons/AntDesign";
 import { CustomDrawerStyled } from "./styled";
 import { getColor } from "../../../assets/theme/colors";
