@@ -66,7 +66,7 @@ const Register = ({
         label="First Name"
         value={values.firstname}
         onChangeText={(value) => handleChange("firstname", value)}
-        error={errors.firstname}
+        error={errors?.firstname}
       />
 
       <TextInput
@@ -74,21 +74,21 @@ const Register = ({
         label="Last Name"
         value={values.lastname}
         onChangeText={(value) => handleChange("lastname", value)}
-        error={errors.lastname}
+        error={errors?.lastname}
       />
       <TextInput
         style={{ marginTop: 10 }}
         label="Email"
         value={values.email}
         onChangeText={(value) => handleChange("email", value)}
-        error={errors.email}
+        error={errors?.email}
       />
       <TextInput
         style={{ marginTop: 10 }}
         label="passowrd"
         value={values.password}
         onChangeText={(value) => handleChange("password", value)}
-        error={errors.password}
+        error={errors?.password}
         icon={
           <Pressable onPress={handleShowPassword}>
             <Typography>{showPassword ? "Hide" : "Show"}</Typography>
