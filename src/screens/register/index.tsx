@@ -4,7 +4,6 @@ import { Route } from "../../constants/route";
 import axiosInstance from "../../helpers/axiosIntance";
 import { useGlobalDispatch, useGlobalState } from "../../store";
 import { AUTHTYPE } from "../../store/reducers/auth";
-///import { authInitialState } from "../../store/reducers/auth";
 import RegisterComponent from "../../ui/compounds/register";
 
 const Register = () => {
@@ -103,7 +102,6 @@ const Register = () => {
 
     dispatch({
       type: AUTHTYPE.IS_LOADING,
-      payload: {},
     });
 
     axiosInstance
@@ -113,11 +111,9 @@ const Register = () => {
         navigate(Route.Login);
       })
       .catch((err) => {
-        console.log(err.response.data);
         setErrors(err.response.data);
         dispatch({
           type: AUTHTYPE.AUTH_ERROR,
-          payload: {},
         });
       });
   };

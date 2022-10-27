@@ -87,10 +87,8 @@ const Login = () => {
       })
       .catch((err) => {
         setErrors((prev) => ({ ...prev, ...err.response.data?.error }));
-        console.log(err.response.data);
         dispatch({
           type: AUTHTYPE.AUTH_ERROR,
-          payload: {},
         });
       });
   };

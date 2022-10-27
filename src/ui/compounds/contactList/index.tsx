@@ -1,44 +1,49 @@
 import React, { useState } from "react";
-import { FlatList, View } from "react-native";
+import { ActivityIndicator, FlatList, View } from "react-native";
+import { getColor } from "../../../assets/theme/colors";
 import { Typography } from "../../atoms";
 import Button from "../../molecules/buttons";
+import ContactCard from "../../molecules/contactCard";
 import EmptyComponent from "../../molecules/emptyData";
 import Modal from "../../molecules/modal";
 
-function ContactList() {
-  const [openModal, setOpenModal] = useState(false);
-  const [data, setData] = useState([]);
+interface IContactList {
+  loading: boolean;
+  data: any[];
+}
 
+function ContactList({ data, loading }: IContactList) {
   return (
     <View
       style={{
         flex: 1,
       }}
     >
-      {/* <Modal visible={openModal} handleClose={() => setOpenModal(false)} />
-
-      <Typography>ContactList</Typography>
-      <Button
-        title="Open Modal"
-        color="accent"
-        onPress={() => setOpenModal(true)}
-      /> */}
-      {data?.length > 0 && (
-        <FlatList
-          data={data}
-          renderItem={() => (
-            <View>
-              <Typography>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo,
-                dolores rerum quia perferendis officia numquam officiis aliquid
-                enim, iusto vel facere veritatis hic voluptatem quisquam culpa
-                in dicta commodi ipsam!
-              </Typography>
-            </View>
-          )}
-        />
+      {loading && (
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: getColor("white"),
+          }}
+        >
+          <ActivityIndicator size="large" />
+        </View>
       )}
-      {data.length < 1 && <EmptyComponent content="Contact list is empty" />}
+      {!loading && (
+        <>
+          {data?.length > 0 && (
+            <FlatList
+              data={data}
+              renderItem={({ item }) => <ContactCard {...item} />}
+            />
+          )}
+          {data.length < 1 && (
+            <EmptyComponent content="Contact list is empty" />
+          )}
+        </>
+      )}
     </View>
   );
 }

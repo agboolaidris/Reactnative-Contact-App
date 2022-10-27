@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { PublicStack } from "./stack";
 import { DrawerNavigation } from "./drawer";
@@ -10,7 +10,7 @@ function Navigation() {
   const [isLoading, setisLoading] = useState(true);
   const { authInitialState } = useGlobalState();
   const dispatch = useGlobalDispatch();
-  React.useEffect(() => {
+  useEffect(() => {
     axiosInstance
       .get("/auth/isme")
       .then((res) => {

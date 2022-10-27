@@ -2,31 +2,38 @@ import React, { createContext, ReactNode, useReducer, useContext } from "react";
 import {
   AuthReducer,
   authInitialState,
-  AuthIntialState,
+  AuthIntialStateProps,
   AuthActionProps,
 } from "./reducers/auth";
+import {
+  ContactActionProps,
+  ContactReducer,
+  contactInitialState,
+  ContactIntialStateProps,
+} from "./reducers/contact";
 
 interface Props {
   children: ReactNode;
 }
 
-interface InitialState {
-  authInitialState: AuthIntialState;
+interface InitialStateProps {
+  authInitialState: AuthIntialStateProps;
+  contactInitialState: ContactIntialStateProps;
 }
 
-const initialState: InitialState = {
+const initialState: InitialStateProps = {
   authInitialState,
+  contactInitialState,
 };
 
-const StateContext = createContext<InitialState>(initialState);
-const DispatchContext = createContext<React.Dispatch<AuthActionProps>>(
-  () => null
-);
+const StateContext = createContext<InitialStateProps>(initialState);
+const DispatchContext = createContext<React.Dispatch<any>>(() => null);
 
 const globalReducer = (
-  { authInitialState }: InitialState,
-  action: AuthActionProps
+  { authInitialState, contactInitialState }: InitialStateProps,
+  action: any
 ) => ({
+  contactInitialState: ContactReducer(contactInitialState, action),
   authInitialState: AuthReducer(authInitialState, action),
 });
 

@@ -1,6 +1,6 @@
-export interface AuthIntialState {
-  isAuthenticated?: boolean;
-  isloading?: boolean;
+export interface AuthIntialStateProps {
+  isAuthenticated: boolean;
+  isloading: boolean;
   user?: {
     firstname: string;
     lastname: string;
@@ -10,10 +10,10 @@ export interface AuthIntialState {
 
 export interface AuthActionProps {
   type: string;
-  payload: AuthIntialState;
+  payload: AuthIntialStateProps;
 }
 
-export const authInitialState: AuthIntialState = {
+export const authInitialState: AuthIntialStateProps = {
   isAuthenticated: false,
   isloading: false,
   user: undefined,
@@ -28,7 +28,7 @@ export const AUTHTYPE = {
 };
 
 export const AuthReducer = (
-  state: AuthIntialState,
+  state: AuthIntialStateProps,
   { payload, type }: AuthActionProps
 ) => {
   switch (type) {
